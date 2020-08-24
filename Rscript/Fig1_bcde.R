@@ -17,7 +17,6 @@ p1<- ggviolin(data1, x="Group", y="Novel.mitags.rate", fill = "Group", width = 1
   guides(fill=F)+scale_x_discrete(labels = c("Bottom\n(n=17)", "Slope\n(n=20)","Mariana\nwater\n(n=7)","Tara\nOcean\n(n=139)"))+
   theme(axis.text = element_text(size=10,family="serif"))+
   stat_compare_means(comparisons=p1_comparisons, label.y = c(0.57, 0.62, 0.67), method = "wilcox.test",size=3) # Add pairwise comparisons p-value 
-p1
 
 data2<- read.table("C:/Users/zhouyl/Desktop/mnsz_zhexian_new.txt",head = T,sep="\t")
 data2$Group <- factor(data2$Group, levels=c("Bottom", "Slope"), ordered=TRUE)
@@ -29,38 +28,32 @@ p2<-ggboxplot(data2, x="Group", y="Novel.mitags.rate", fill = "Group",width = 0.
   theme(axis.text = element_text(size=10,family="serif"))+
   scale_x_discrete(labels = c("Bottom\n(n=17)", "Slope\n(n=20)"))+
   stat_compare_means(comparisons=p2_comparisons,label.y=0.25,label.x=0.5,size=3, method = "wilcox.test")  # Add pairwise comparisons p-value 
-p2
+
 
 data3<- read.table("C:/Users/zhouyl/Desktop/novel_mitag_rates_line.txt",head = T,sep="\t")
-p3<-ggscatter(data3,size=1.2,x = "water_depth", #x变量 
-              y = "Novel.mitags.rate",#y变量
-              add = "reg.line",##拟合曲线
-              conf.int = TRUE,##置信区间阴影带
-              cor.coef = TRUE, ##系数
+p3<-ggscatter(data3,size=1.2,x = "water_depth", 
+              y = "Novel.mitags.rate",
+              add = "reg.line",
+              conf.int = TRUE,
+              cor.coef = TRUE, 
               add.params = list(color = "#84C1FF",fill = "#ff7575",size=1.5),
-              cor.method = "pearson",#方法
-              xlab = "Water depth(m)", ##x轴
+              cor.method = "pearson",
+              xlab = "Water depth(m)", 
               ylab = "Novel 16S mitags rates(%)")+scale_y_continuous(labels=paste(seq(0.1,0.5,len=5)*100))+
   theme(axis.text = element_text(size=10,family="serif"))
 
-p3
-
-G=paste(seq(0,0.8,len=5)*100)
-G
-
-
 data2<- read.table("C:/Users/zhouyl/Desktop/mitag_mns_line.txt",head = T,sep="\t")
 p4<- ggscatter(data2,size=1.2,
-               x = "water_depth", #x变量
-               y = "MNS",#y变量
-               add = "reg.line",##拟合曲线
-               conf.int = TRUE,##置信区间阴影带
-               cor.coef = TRUE, ##系数
+               x = "water_depth", 
+               y = "MNS",
+               add = "reg.line",
+               conf.int = TRUE,
+               cor.coef = TRUE,
                add.params = list(color = "#84C1FF",fill = "#ff7575",size=1.5),
-               cor.method = "pearson",#方法
-               xlab = "Water depth(m)", ##x轴
+               cor.method = "pearson",
+               xlab = "Water depth(m)", 
                ylab = "Microbiome novelty scores")+theme(axis.text = element_text(size=10,family="serif"))
-p4
+
 aligned_plots<- align_plots(p1, p2,p3,p4, align="h")
 ggdraw( xlim = c(0, 1.1), ylim = c(0, 0.30))+
   draw_plot(aligned_plots[[1]], x=0,y=0,  width=0.30, height = 0.28)+
@@ -69,4 +62,3 @@ ggdraw( xlim = c(0, 1.1), ylim = c(0, 0.30))+
   draw_plot(aligned_plots[[4]], x=0.73,y=0, width = 0.28, height = 0.28)+
   draw_plot_label(label = c("b", "c","d","e"), size = 15, x=c(0, 0.30, 0.45, 0.73), y=c(0.3,0.3,0.3,0.3))
 
-#plot_grid(p1,p2,p3,p4, labels = c("b", "c","d","e"),align = "h",nrow = 1,x=c(0, 0.5, 1,2) )
