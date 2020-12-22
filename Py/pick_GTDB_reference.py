@@ -35,7 +35,7 @@ class gtdbtk():
                 else:
                     species.add(classify.split(';s__')[0])
 
-        with open('/data2017/share/tools/miniconda3/share/gtdbtk-0.1.6/db/release86/taxonomy/gtdb_taxonomy.tsv','r+') as gtdb_taxonomyFlie:
+        with open('release86/taxonomy/gtdb_taxonomy.tsv','r+') as gtdb_taxonomyFlie:
             lines=gtdb_taxonomyFlie.readlines()
             for line in lines:
                 binid=line.split('\t')[0].strip()
@@ -66,7 +66,7 @@ class gtdbtk():
         n=0
         for i in idpick_trans:
             n+=1
-            copyfile('/data2017/share/tools/miniconda3/share/gtdbtk-0.1.6/db/release86/fastani/database/'+i+'_genomic.fna.gz', self._outputFiledir+'/ref'+str(n)+'.fasta.gz')
+            copyfile('release86/fastani/database/'+i+'_genomic.fna.gz', self._outputFiledir+'/ref'+str(n)+'.fasta.gz')
 
         with open(self._outputFilelist,'w+') as referencelist :
              referencelist.writelines(result)
