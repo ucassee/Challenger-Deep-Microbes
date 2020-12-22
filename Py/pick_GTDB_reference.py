@@ -15,7 +15,7 @@ class gtdbtk():
         self._number = number
         print('start:'+time.strftime('%Y-%m-%d %H:%M:%S'))
 
-### load listfile to count kegg annotation for each bins
+### loading
     def pick(self):
         global gtdbdict,result,species,idpick,idpick_trans,icount,referencenumber
         referencenumber =self._number
