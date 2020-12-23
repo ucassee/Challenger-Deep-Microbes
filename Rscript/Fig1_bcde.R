@@ -4,19 +4,19 @@ require(Hmisc)
 require(corrplot)
 library(cowplot)
 
-data1<- read.table("C:/Users/zhouyl/Desktop/mariana_mitag_rate_box.txt",head = T,sep="\t")
+data1<- read.table("C:/Users/zhouyl/Desktop/fig1b_mariana_mitag_rate_box.txt",head = T,sep="\t")
 
-data1$Group <- factor(data1$Group, levels=c("Bottom", "Slope", "Mariana Water","Tara Ocean"), ordered=TRUE)
-p1_comparisons <- list(c("Bottom", "Slope"), c( "Bottom","Mariana Water"), c("Bottom", "Tara Ocean"))
-p1<- ggviolin(data1, x="Group", y="Novel.mitags.rate", fill = "Group", width = 1.5,
+data1$Group <- factor(data1$Group, levels=c("Bottom", "Slope","Deep sea", "Mariana Water","Tara Ocean"), ordered=TRUE)
+p1_comparisons <- list(c("Bottom", "Slope"), c("Bottom","Deep sea"),c("Slope","Deep sea"),c( "Bottom","Mariana Water"), c("Bottom", "Tara Ocean"))
+p1<- ggboxplot(data1, x="Group", y="Novel.mitags.rate", fill = "Group", width = 0.5,
               xlab = "",
-              palette = c("#84C1FF","#02C874","#ff7575","#FFE153"),
-              add = "boxplot", add.params = list(fill="white",size = 0.3)
+              palette = c("#F2CCC9","#FEFF99","#85C4FF","#B14A87","#B3B3B3"),
               # add = "jitter",add.params = list(color = "Group",alpha=0.5)
 )+ylab(label = "Novel 16S miTag rates(%)")+scale_y_continuous(labels=paste(seq(0,0.8,len=5)*100))+
-  guides(fill=F)+scale_x_discrete(labels = c("Bottom\n(n=17)", "Slope\n(n=20)","Mariana\nwater\n(n=7)","Tara\nOcean\n(n=139)"))+
+  guides(fill=F)+scale_x_discrete(labels = c("Bottom\naxis\n(n=17)", "Slope\n(n=20)","Deep\nsed\n(n=14)","Mariana\nwater\n(n=7)","Tara\nOcean\n(n=139)"))+
   theme(axis.text = element_text(size=10,family="serif"))+
-  stat_compare_means(comparisons=p1_comparisons, label.y = c(0.57, 0.62, 0.67), method = "wilcox.test",size=3) # Add pairwise comparisons p-value 
+  stat_compare_means(comparisons=p1_comparisons, label.y = c( 0.52, 0.57,0.4, 0.62, 0.67), method = "wilcox.test",size=3) # Add pairwise comparisons p-value 
+p1
 
 data2<- read.table("C:/Users/zhouyl/Desktop/mnsz_zhexian_new.txt",head = T,sep="\t")
 data2$Group <- factor(data2$Group, levels=c("Bottom", "Slope"), ordered=TRUE)
