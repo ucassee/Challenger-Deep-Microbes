@@ -1,5 +1,5 @@
 # Challenger-Deep-Microbes
-This repository is associated with the paper **Novel microbiomes and their ecological functions in Challenger Deep sediments**
+This repository is associated with the paper **Microbiomes in the Challenger Deep slope and bottom-axis sediments**
 
 ## Data
 
